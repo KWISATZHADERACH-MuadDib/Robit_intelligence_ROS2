@@ -1,0 +1,59 @@
+controller_manager:
+  ros__parameters:
+    update_rate: 100  # 제어 루프 주기 (Hz)
+
+    joint_state_broadcaster:
+      type: joint_state_broadcaster/JointStateBroadcaster
+
+    camera_tower_controller:
+      type: forward_command_controller/ForwardCommandController
+
+    arm_controller:
+      type: joint_trajectory_controller/JointTrajectoryController
+
+    base_velocity_controller:
+      type: diff_drive_controller/DiffDriveController
+
+    flipper_controller:
+      type: forward_command_controller/ForwardCommandController
+
+camera_tower_controller:
+  ros__parameters:
+    joints:
+      - ct_joint1_1
+      - ct_joint1_2
+      - ct_joint2_1
+      - ct_joint2_2
+    interface_name: position
+
+arm_controller:
+  ros__parameters:
+    joints:
+      - arm_joint1
+      - arm_joint2
+      - arm_joint3
+      - arm_joint4
+      - arm_joint5
+      - arm_joint6
+    command_interfaces:
+      - position
+    state_interfaces:
+      - position
+      - velocity
+
+base_velocity_controller:
+  ros__parameters:
+    left_wheel_names: ["left_wheel_joint"]
+    right_wheel_names: ["right_wheel_joint"]
+    wheel_separation: 0.24
+    wheel_radius: 0.08
+    use_stamped_vel: ture
+
+flipper_controller:
+  ros__parameters:
+    joints:
+      - fl_joint
+      - fr_joint
+      - bl_joint
+      - br_joint
+    interface_name: position
